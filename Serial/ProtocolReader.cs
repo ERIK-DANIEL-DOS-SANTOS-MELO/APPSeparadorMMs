@@ -32,7 +32,7 @@ namespace AppSeparadorMMs.Serial
             {
                 string ownerText = owner.ToString();
 
-                if (raw.StartsWith(ownerText))
+                if (raw.StartsWith(ownerText, StringComparison.OrdinalIgnoreCase))
                 {
                     raw = raw.Remove(0, ownerText.Length).Trim();
                     return owner;
@@ -48,7 +48,7 @@ namespace AppSeparadorMMs.Serial
             {
                 string protocolText = protocol + ":";
 
-                if (raw.StartsWith(protocolText))
+                if (raw.StartsWith(protocolText, StringComparison.OrdinalIgnoreCase))
                 {
                     raw = raw.Remove(0, protocolText.Length).Trim();
                     return protocol;

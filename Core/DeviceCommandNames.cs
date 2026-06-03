@@ -8,15 +8,16 @@ namespace AppSeparadorMMs.Core
 {
     public static class DeviceCommandNames
     {
+        public const string IsRunning = "IsRunning";
         public const string Start = "Start";
         public const string Stop = "Stop";
         public const string ResetCounters = "ResetCounters";
 
         public const string Ping = "Ping";
-        public const string GetConfig = "GetConfig";
-        public const string SaveConfig = "SaveConfig";
 
+        public const string GetThreshold = "GetThreshold";
         public const string SetThreshold = "SetThreshold";
-        public const string SetSamplingInterval = "SetSamplingInterval";
+        public const string GetInterval = "GetInterval";
+        public const string SetInterval = "SetInterval";
     }
 }

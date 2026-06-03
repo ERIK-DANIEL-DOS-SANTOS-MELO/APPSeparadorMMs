@@ -44,6 +44,9 @@
             label_darkTitle = new Label();
             tabPage_Controller = new TabPage();
             groupBox_Configs = new GroupBox();
+            button_SaveChanges = new Button();
+            label_Interval = new Label();
+            trackBar_Interval = new TrackBar();
             label_Threshold = new Label();
             trackBar_Threshold = new TrackBar();
             button_Connect = new Button();
@@ -51,10 +54,10 @@
             toolStrip_Ports = new ToolStrip();
             toolStripComboBox_Ports = new ToolStripComboBox();
             toolStripButton_RefreshPort = new ToolStripButton();
+            toolStripLabel_Status = new ToolStripLabel();
             timer_Timer = new System.Windows.Forms.Timer(components);
-            label_Interval = new Label();
-            trackBar_Interval = new TrackBar();
-            button_SaveChanges = new Button();
+            label_ActualThreshold = new Label();
+            label_ActualInterval = new Label();
             tabControl_Main.SuspendLayout();
             tabPage_Counter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer_Counter).BeginInit();
@@ -67,9 +70,9 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDown_DarkCounter).BeginInit();
             tabPage_Controller.SuspendLayout();
             groupBox_Configs.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBar_Interval).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBar_Threshold).BeginInit();
             toolStrip_Ports.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)trackBar_Interval).BeginInit();
             SuspendLayout();
             // 
             // tabControl_Main
@@ -118,6 +121,7 @@
             button_Start.TabIndex = 1;
             button_Start.Text = "Iniciar";
             button_Start.UseVisualStyleBackColor = false;
+            button_Start.Click += button_Start_Click;
             // 
             // splitContainer_Counter
             // 
@@ -157,6 +161,7 @@
             numericUpDown_LightCounter.Increment = new decimal(new int[] { 0, 0, 0, 0 });
             numericUpDown_LightCounter.InterceptArrowKeys = false;
             numericUpDown_LightCounter.Location = new Point(18, 65);
+            numericUpDown_LightCounter.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
             numericUpDown_LightCounter.Name = "numericUpDown_LightCounter";
             numericUpDown_LightCounter.ReadOnly = true;
             numericUpDown_LightCounter.Size = new Size(146, 23);
@@ -204,6 +209,7 @@
             numericUpDown_DarkCounter.Increment = new decimal(new int[] { 0, 0, 0, 0 });
             numericUpDown_DarkCounter.InterceptArrowKeys = false;
             numericUpDown_DarkCounter.Location = new Point(18, 65);
+            numericUpDown_DarkCounter.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
             numericUpDown_DarkCounter.Name = "numericUpDown_DarkCounter";
             numericUpDown_DarkCounter.ReadOnly = true;
             numericUpDown_DarkCounter.Size = new Size(150, 23);
@@ -249,6 +255,8 @@
             // 
             // groupBox_Configs
             // 
+            groupBox_Configs.Controls.Add(label_ActualInterval);
+            groupBox_Configs.Controls.Add(label_ActualThreshold);
             groupBox_Configs.Controls.Add(button_SaveChanges);
             groupBox_Configs.Controls.Add(label_Interval);
             groupBox_Configs.Controls.Add(trackBar_Interval);
@@ -261,6 +269,40 @@
             groupBox_Configs.TabIndex = 4;
             groupBox_Configs.TabStop = false;
             groupBox_Configs.Text = "Configurações";
+            // 
+            // button_SaveChanges
+            // 
+            button_SaveChanges.BackColor = Color.WhiteSmoke;
+            button_SaveChanges.Dock = DockStyle.Bottom;
+            button_SaveChanges.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button_SaveChanges.Location = new Point(3, 128);
+            button_SaveChanges.Name = "button_SaveChanges";
+            button_SaveChanges.Size = new Size(364, 32);
+            button_SaveChanges.TabIndex = 4;
+            button_SaveChanges.Text = "Salvar";
+            button_SaveChanges.UseVisualStyleBackColor = false;
+            button_SaveChanges.Click += button_SaveChanges_Click;
+            // 
+            // label_Interval
+            // 
+            label_Interval.AutoSize = true;
+            label_Interval.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label_Interval.Location = new Point(6, 71);
+            label_Interval.Name = "label_Interval";
+            label_Interval.Size = new Size(119, 16);
+            label_Interval.TabIndex = 3;
+            label_Interval.Text = "Intervalo de Leitura";
+            // 
+            // trackBar_Interval
+            // 
+            trackBar_Interval.Location = new Point(6, 94);
+            trackBar_Interval.Maximum = 2000;
+            trackBar_Interval.Minimum = 20;
+            trackBar_Interval.Name = "trackBar_Interval";
+            trackBar_Interval.Size = new Size(358, 45);
+            trackBar_Interval.TabIndex = 2;
+            trackBar_Interval.TickFrequency = 100;
+            trackBar_Interval.Value = 50;
             // 
             // label_Threshold
             // 
@@ -275,9 +317,13 @@
             // trackBar_Threshold
             // 
             trackBar_Threshold.Location = new Point(6, 42);
+            trackBar_Threshold.Maximum = 825;
+            trackBar_Threshold.Minimum = 615;
             trackBar_Threshold.Name = "trackBar_Threshold";
             trackBar_Threshold.Size = new Size(361, 45);
             trackBar_Threshold.TabIndex = 0;
+            trackBar_Threshold.TickFrequency = 100;
+            trackBar_Threshold.Value = 720;
             // 
             // button_Connect
             // 
@@ -289,6 +335,7 @@
             button_Connect.TabIndex = 3;
             button_Connect.Text = "Conectar";
             button_Connect.UseVisualStyleBackColor = false;
+            button_Connect.Click += button_Connect_Click;
             // 
             // button_Disconnect
             // 
@@ -300,12 +347,13 @@
             button_Disconnect.TabIndex = 2;
             button_Disconnect.Text = "Desconectar";
             button_Disconnect.UseVisualStyleBackColor = false;
+            button_Disconnect.Click += button_Disconnect_Click;
             // 
             // toolStrip_Ports
             // 
             toolStrip_Ports.AutoSize = false;
             toolStrip_Ports.BackColor = Color.DarkGray;
-            toolStrip_Ports.Items.AddRange(new ToolStripItem[] { toolStripComboBox_Ports, toolStripButton_RefreshPort });
+            toolStrip_Ports.Items.AddRange(new ToolStripItem[] { toolStripComboBox_Ports, toolStripButton_RefreshPort, toolStripLabel_Status });
             toolStrip_Ports.Location = new Point(3, 3);
             toolStrip_Ports.Name = "toolStrip_Ports";
             toolStrip_Ports.Size = new Size(370, 32);
@@ -328,35 +376,34 @@
             toolStripButton_RefreshPort.ImageTransparentColor = Color.Magenta;
             toolStripButton_RefreshPort.Name = "toolStripButton_RefreshPort";
             toolStripButton_RefreshPort.Size = new Size(23, 23);
+            toolStripButton_RefreshPort.Click += toolStripButton_RefreshPort_Click;
             // 
-            // label_Interval
+            // toolStripLabel_Status
             // 
-            label_Interval.AutoSize = true;
-            label_Interval.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label_Interval.Location = new Point(6, 71);
-            label_Interval.Name = "label_Interval";
-            label_Interval.Size = new Size(119, 16);
-            label_Interval.TabIndex = 3;
-            label_Interval.Text = "Intervalo de Leitura";
+            toolStripLabel_Status.Font = new Font("Century Gothic", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            toolStripLabel_Status.Name = "toolStripLabel_Status";
+            toolStripLabel_Status.Size = new Size(89, 29);
+            toolStripLabel_Status.Text = "Carregando...";
             // 
-            // trackBar_Interval
+            // label_ActualThreshold
             // 
-            trackBar_Interval.Location = new Point(6, 94);
-            trackBar_Interval.Name = "trackBar_Interval";
-            trackBar_Interval.Size = new Size(358, 45);
-            trackBar_Interval.TabIndex = 2;
+            label_ActualThreshold.AutoSize = true;
+            label_ActualThreshold.Font = new Font("Century Gothic", 8.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label_ActualThreshold.Location = new Point(156, 20);
+            label_ActualThreshold.Name = "label_ActualThreshold";
+            label_ActualThreshold.Size = new Size(33, 15);
+            label_ActualThreshold.TabIndex = 5;
+            label_ActualThreshold.Text = "(720)";
             // 
-            // button_SaveChanges
+            // label_ActualInterval
             // 
-            button_SaveChanges.BackColor = Color.WhiteSmoke;
-            button_SaveChanges.Dock = DockStyle.Bottom;
-            button_SaveChanges.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button_SaveChanges.Location = new Point(3, 128);
-            button_SaveChanges.Name = "button_SaveChanges";
-            button_SaveChanges.Size = new Size(364, 32);
-            button_SaveChanges.TabIndex = 4;
-            button_SaveChanges.Text = "Salvar";
-            button_SaveChanges.UseVisualStyleBackColor = false;
+            label_ActualInterval.AutoSize = true;
+            label_ActualInterval.Font = new Font("Century Gothic", 8.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label_ActualInterval.Location = new Point(131, 72);
+            label_ActualInterval.Name = "label_ActualInterval";
+            label_ActualInterval.Size = new Size(27, 15);
+            label_ActualInterval.TabIndex = 6;
+            label_ActualInterval.Text = "(50)";
             // 
             // FormMain
             // 
@@ -367,6 +414,7 @@
             Controls.Add(tabControl_Main);
             Name = "FormMain";
             Text = "Separador de M&Ms";
+            FormClosing += FormMain_FormClosing;
             tabControl_Main.ResumeLayout(false);
             tabPage_Counter.ResumeLayout(false);
             tabPage_Counter.PerformLayout();
@@ -381,10 +429,10 @@
             tabPage_Controller.ResumeLayout(false);
             groupBox_Configs.ResumeLayout(false);
             groupBox_Configs.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBar_Interval).EndInit();
             ((System.ComponentModel.ISupportInitialize)trackBar_Threshold).EndInit();
             toolStrip_Ports.ResumeLayout(false);
             toolStrip_Ports.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)trackBar_Interval).EndInit();
             ResumeLayout(false);
         }
 
@@ -416,5 +464,8 @@
         private Label label_Interval;
         private TrackBar trackBar_Interval;
         private Button button_SaveChanges;
+        private ToolStripLabel toolStripLabel_Status;
+        private Label label_ActualThreshold;
+        private Label label_ActualInterval;
     }
 }

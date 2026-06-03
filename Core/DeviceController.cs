@@ -41,6 +41,13 @@ namespace AppSeparadorMMs.Core
             _isRunning = false;
 
             if (IsConnected) _serialService.Disconnect();
+
+            if (_readThread is not null && _readThread.IsAlive)
+            {
+                _readThread.Join(1500);
+            }
+
+            _readThread = null;
         }
 
         public void SendData(string data, double value)
