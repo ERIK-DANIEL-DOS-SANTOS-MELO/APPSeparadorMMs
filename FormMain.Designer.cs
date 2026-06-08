@@ -44,6 +44,8 @@
             label_darkTitle = new Label();
             tabPage_Controller = new TabPage();
             groupBox_Configs = new GroupBox();
+            label_ActualInterval = new Label();
+            label_ActualThreshold = new Label();
             button_SaveChanges = new Button();
             label_Interval = new Label();
             trackBar_Interval = new TrackBar();
@@ -56,8 +58,6 @@
             toolStripButton_RefreshPort = new ToolStripButton();
             toolStripLabel_Status = new ToolStripLabel();
             timer_Timer = new System.Windows.Forms.Timer(components);
-            label_ActualThreshold = new Label();
-            label_ActualInterval = new Label();
             tabControl_Main.SuspendLayout();
             tabPage_Counter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer_Counter).BeginInit();
@@ -270,6 +270,26 @@
             groupBox_Configs.TabStop = false;
             groupBox_Configs.Text = "Configurações";
             // 
+            // label_ActualInterval
+            // 
+            label_ActualInterval.AutoSize = true;
+            label_ActualInterval.Font = new Font("Century Gothic", 8.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label_ActualInterval.Location = new Point(131, 72);
+            label_ActualInterval.Name = "label_ActualInterval";
+            label_ActualInterval.Size = new Size(27, 15);
+            label_ActualInterval.TabIndex = 6;
+            label_ActualInterval.Text = "(50)";
+            // 
+            // label_ActualThreshold
+            // 
+            label_ActualThreshold.AutoSize = true;
+            label_ActualThreshold.Font = new Font("Century Gothic", 8.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label_ActualThreshold.Location = new Point(156, 20);
+            label_ActualThreshold.Name = "label_ActualThreshold";
+            label_ActualThreshold.Size = new Size(33, 15);
+            label_ActualThreshold.TabIndex = 5;
+            label_ActualThreshold.Text = "(720)";
+            // 
             // button_SaveChanges
             // 
             button_SaveChanges.BackColor = Color.WhiteSmoke;
@@ -296,8 +316,8 @@
             // trackBar_Interval
             // 
             trackBar_Interval.Location = new Point(6, 94);
-            trackBar_Interval.Maximum = 2000;
-            trackBar_Interval.Minimum = 20;
+            trackBar_Interval.Maximum = 5000;
+            trackBar_Interval.Minimum = 50;
             trackBar_Interval.Name = "trackBar_Interval";
             trackBar_Interval.Size = new Size(358, 45);
             trackBar_Interval.TabIndex = 2;
@@ -318,7 +338,7 @@
             // 
             trackBar_Threshold.Location = new Point(6, 42);
             trackBar_Threshold.Maximum = 825;
-            trackBar_Threshold.Minimum = 615;
+            trackBar_Threshold.Minimum = 505;
             trackBar_Threshold.Name = "trackBar_Threshold";
             trackBar_Threshold.Size = new Size(361, 45);
             trackBar_Threshold.TabIndex = 0;
@@ -384,26 +404,6 @@
             toolStripLabel_Status.Name = "toolStripLabel_Status";
             toolStripLabel_Status.Size = new Size(89, 29);
             toolStripLabel_Status.Text = "Carregando...";
-            // 
-            // label_ActualThreshold
-            // 
-            label_ActualThreshold.AutoSize = true;
-            label_ActualThreshold.Font = new Font("Century Gothic", 8.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label_ActualThreshold.Location = new Point(156, 20);
-            label_ActualThreshold.Name = "label_ActualThreshold";
-            label_ActualThreshold.Size = new Size(33, 15);
-            label_ActualThreshold.TabIndex = 5;
-            label_ActualThreshold.Text = "(720)";
-            // 
-            // label_ActualInterval
-            // 
-            label_ActualInterval.AutoSize = true;
-            label_ActualInterval.Font = new Font("Century Gothic", 8.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label_ActualInterval.Location = new Point(131, 72);
-            label_ActualInterval.Name = "label_ActualInterval";
-            label_ActualInterval.Size = new Size(27, 15);
-            label_ActualInterval.TabIndex = 6;
-            label_ActualInterval.Text = "(50)";
             // 
             // FormMain
             // 

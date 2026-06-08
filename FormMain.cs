@@ -140,6 +140,8 @@ namespace AppSeparadorMMs
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            _device?.SendCommand(DeviceCommandNames.ResetCounters);
+
             _device?.Dispose();
 
             _device = null;
@@ -154,8 +156,11 @@ namespace AppSeparadorMMs
                 return;
             }
 
+            _device?.SendCommand(DeviceCommandNames.ResetCounters);
+
             bool isStarting = button_Start.Text == "Iniciar";
-            _device.SendCommand(isStarting ? DeviceCommandNames.Start : DeviceCommandNames.Stop);
+            _device?.SendCommand(isStarting ? DeviceCommandNames.Start : DeviceCommandNames.Stop);
+            
             button_Start.Text = isStarting ? "Parar" : "Iniciar";
         }
 
