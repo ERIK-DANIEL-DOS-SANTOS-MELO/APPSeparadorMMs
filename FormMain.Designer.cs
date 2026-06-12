@@ -163,7 +163,7 @@
             numericUpDown_LightCounter.Location = new Point(18, 65);
             numericUpDown_LightCounter.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
             numericUpDown_LightCounter.Name = "numericUpDown_LightCounter";
-            numericUpDown_LightCounter.ReadOnly = true;
+            numericUpDown_LightCounter.ReadOnly = false;
             numericUpDown_LightCounter.Size = new Size(146, 23);
             numericUpDown_LightCounter.TabIndex = 1;
             // 
@@ -211,7 +211,7 @@
             numericUpDown_DarkCounter.Location = new Point(18, 65);
             numericUpDown_DarkCounter.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
             numericUpDown_DarkCounter.Name = "numericUpDown_DarkCounter";
-            numericUpDown_DarkCounter.ReadOnly = true;
+            numericUpDown_DarkCounter.ReadOnly = false;
             numericUpDown_DarkCounter.Size = new Size(150, 23);
             numericUpDown_DarkCounter.TabIndex = 1;
             // 
